@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyLife Opportunities — Premium Presentation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #E97A22;
+            --dark: #1E1E1E;
+            --charcoal: #2C2C2C;
+            --light-beige: #FAF9F6;
+            --milk: #F4F1EA;
+            --white: #FFFFFF;
+            --gray: #7F8C8D;
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--light-beige);
+            color: var(--dark);
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Presentation Wrapper */
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Navigation controls */
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            right: 40px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .btn {
+            background-color: var(--charcoal);
+            color: var(--white);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .btn-prev {
+            background-color: transparent;
+            color: var(--charcoal);
+            border: 2px solid var(--charcoal);
+        }
+
+        .btn-prev:hover {
+            background-color: var(--charcoal);
+            color: var(--white);
+        }
+
+        /* Progress indicator */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background-color: var(--primary);
+            z-index: 101;
+            transition: width 0.3s ease;
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 45px;
+            left: 40px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--gray);
+            z-index: 100;
+            letter-spacing: 1px;
+        }
+
+        /* Slides container */
+        .slides {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 80px;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Layout Types */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            width: 100%;
+            max-width: 1200px;
+            align-items: center;
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 40px;
+        }
+
+        /* Typography & elements */
+        .tag {
+            color: var(--primary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.15;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            color: var(--primary);
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            line-height: 1.25;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.65;
+            color: var(--charcoal);
+            margin-bottom: 20px;
+        }
+
+        .lead-p {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: var(--charcoal);
+            font-weight: 400;
+        }
+
+        /* Modern Cards */
+        .card {
+            background-color: var(--white);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: var(--transition);
+            border-top: 4px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-top-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(233, 122, 34, 0.08);
+        }
+
+        .card-num {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--gray);
+            margin-bottom: 0;
+            line-height: 1.5;
+        }
+
+        /* Big Accent Layout */
+        .hero-slide {
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .logo-mark {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+        }
+
+        .logo-mark span {
+            color: var(--primary);
+        }
+
+        /* Visual Media Box */
+        .visual-box {
+            width: 100%;
+            height: 480px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .visual-box .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            padding: 30px;
+            color: var(--white);
+        }
+
+        /* Interactive slide effects */
+        .slide .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .slide.active .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.2s !important; }
+        .delay-2 { transition-delay: 0.4s !important; }
+        .delay-3 { transition-delay: 0.6s !important; }
+
+        /* Modern Feedback Form */
+        .feedback-form {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 500px;
+            border: 2px solid var(--milk);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: var(--charcoal);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1.5px solid var(--milk);
+            background-color: var(--light-beige);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: var(--white);
+            box-shadow: 0 0 10px rgba(233, 122, 34, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 16px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        .form-status {
+            margin-top: 15px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .grid-cards {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .slide {
+                padding: 40px 20px;
+                overflow-y: auto;
+            }
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.6rem; }
+            .controls {
+                bottom: 15px;
+                right: 20px;
+            }
+            .slide-counter {
+                bottom: 25px;
+                left: 20px;
+            }
+            .visual-box {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="slide-counter" id="slideCounter">1 / 8</div>
+
+    <div class="presentation-container">
+        <div class="slides" id="slidesContainer">
+
+            <!-- Slide 1: Cover -->
+            <div class="slide active" style="background-color: var(--light-beige);">
+                <div class="hero-slide">
+                    <div class="logo-mark fade-in">EASYLIFE<span>.</span>OPPORTUNITIES</div>
+                    <h1 class="fade-in delay-1">Эволюция дохода:<br>новые правила игры в <span>Европе</span></h1>
+                    <p class="lead-p fade-in delay-2" style="max-width: 650px; margin: 0 auto 40px auto; color: var(--gray);">
+                        Честный разговор о свободе, современных партнерских моделях и том, как гармонично вписать новые возможности в привычный ритм жизни.
+                    </p>
+                    <div class="tag fade-in delay-3">Листайте вперед →</div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Why changes -->
+            <div class="slide">
+                <div class="grid-2">
+                    <div>
+                        <span class="tag fade-in">Блок 1 / Мир изменился</span>
+                        <h2 class="fade-in delay-1">Почему одной зарплаты больше недостаточно?</h2>
+                        <p class="fade-in delay-2">
+                            Экономический ландшафт Европы меняется быстрыми темпами. Стабильность одного источника дохода стала иллюзией. Растущая инфляция, динамичный рынок труда и стремление к мобильности заставляют людей искать альтернативы.
+                        </p>
+                        <p class="fade-in delay-3" style="color: var(--gray);">
+                            Современный человек ищет не просто дополнительные деньги, а возможность управлять своим временем и не зависеть от географической точки.
+                        </p>
+                    </div>
+                    <!-- High quality image of minimalist work atmosphere / European city life -->
+                    <div class="visual-box fade-in delay-2" style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop');">
+                        <div class="overlay">
+                            <h3 style="font-size: 1.1rem; font-weight: 600;">Гибкий стиль жизни</h3>
+                            <p style="font-size: 0.85rem; opacity: 0.9; margin: 5px 0 0 0;">Возможность зарабатывать в комфортной обстановке в любой точке мира.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: New Work Model -->
+            <div class="slide">
+                <div class="grid-2">
+                    <!-- High quality workspace / digital entrepreneur photo -->
+                    <div class="visual-box fade-in" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200&auto=format&fit=crop');">
+                        <div class="overlay">
+                            <h3 style="font-size: 1.1rem; font-weight: 600;">Пространство для развития</h3>
+                            <p style="font-size: 0.85rem; opacity: 0.9; margin: 5px 0 0 0;">Проекты и бизнес-решения, интегрированные в личную свободу.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="tag fade-in">Блок 2 / Новая модель работы</span>
+                        <h2 class="fade-in delay-1">Гибкость как главный приоритет</h2>
+                        <p class="fade-in delay-2">
+                            Новое поколение профессионалов стирает границы. Успешный кейс сегодня — это комбинация основной работы, творческих проектов, удаленной деятельности и легких партнерских программ.
+                        </p>
+                        <ul style="list-style: none; margin-top: 20px;" class="fade-in delay-3">
+                            <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-weight: 500;">
+                                <span style="color: var(--primary); font-weight: bold; font-size: 1.2rem;">✔</span> Основная работа + удалённые проекты
+                            </li>
+                            <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-weight: 500;">
+                                <span style="color: var(--primary); font-weight: bold; font-size: 1.2rem;">✔</span> Партнерские программы без рисков
+                            </li>
+                            <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-weight: 500;">
+                                <span style="color: var(--primary); font-weight: bold; font-size: 1.2rem;">✔</span> Путешествия как органическая часть жизни
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: What is EasyLife -->
+            <div class="slide">
+                <div class="hero-slide">
+                    <span class="tag fade-in">Блок 3 / Наша философия</span>
+                    <h2 class="fade-in delay-1" style="font-size: 2.8rem; margin-bottom: 25px;">Что такое EasyLife Opportunities?</h2>
+                    <p class="lead-p fade-in delay-2" style="max-width: 800px; margin: 0 auto 30px auto;">
+                        Это интеллектуальная среда и экосистема рекомендаций, в которой мы аккумулируем лучшие европейские решения для развития, разумного инвестирования, построения гибкой карьеры и получения экологичного дополнительного дохода.
+                    </p>
+                    <p class="fade-in delay-3" style="color: var(--gray); max-width: 700px; margin: 0 auto;">
+                        Мы анализируем глобальные тренды и выбираем готовые проверенные инструменты. Наша ключевая фокус-индустрия на сегодняшний день — динамично растущая <strong>Travel Tech сфера</strong>.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Slide 5: Why Travel -->
+            <div class="slide">
+                <div class="grid-2">
+                    <div>
+                        <span class="tag fade-in">Блок 4 / Рынок</span>
+                        <h2 class="fade-in delay-1">Почему именно путешествия?</h2>
+                        <p class="fade-in delay-2">
+                            Туризм — один из крупнейших секторов мировой экономики с колоссальным запасом прочности. Круизный сегмент бьет рекорды популярности в Европе и США, привлекая миллионы людей ежегодно.
+                        </p>
+                        <p class="fade-in delay-3">
+                            Крупнейшие мировые круизные корпорации всё чаще отказываются от традиционной навязчивой рекламы в пользу <strong>рекомендательного маркетинга</strong> (Referral Models). Они готовы платить тем, кто искренне делится качественным опытом.
+                        </p>
+                    </div>
+                    <!-- Premium Luxury Cruise Ship Image -->
+                    <div class="visual-box fade-in delay-2" style="background-image: url('https://images.unsplash.com/photo-1548574505-5e239809ee19?q=80&w=1200&auto=format&fit=crop');">
+                        <div class="overlay">
+                            <h3 style="font-size: 1.1rem; font-weight: 600;">Круизный сектор</h3>
+                            <p style="font-size: 0.85rem; opacity: 0.9; margin: 5px 0 0 0;">Лидер динамики роста премиального туризма в мире.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: about inCruises -->
+            <div class="slide">
+                <div class="grid-2">
+                    <div class="visual-box fade-in" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop');">
+                        <div class="overlay">
+                            <h3 style="font-size: 1.1rem; font-weight: 600;">inCruises Booking Platform</h3>
+                            <p style="font-size: 0.85rem; opacity: 0.9; margin: 5px 0 0 0;">Умный поиск, соединяющий клиентов с ведущими круизными линиями.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="tag fade-in">Блок 5 / Инструменты</span>
+                        <h2 class="fade-in delay-1">Международный клуб inCruises</h2>
+                        <p class="fade-in delay-2">
+                            Как это устроено? Члены клуба получают уникальные условия бронирования круизов и отелей напрямую у ведущих мировых линий через единый букинг-интерфейс.
+                        </p>
+                        <p class="fade-in delay-3">
+                            Для тех, кто хочет сделать путешествия частью своего дела, предусмотрена <strong>прозрачная партнерская опция</strong>: вы делитесь реферальной ссылкой, помогаете людям бронировать отдых выгоднее и получаете вознаграждение за развитие сообщества.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Who is this for -->
+            <div class="slide">
+                <div>
+                    <div style="text-align: center; margin-bottom: 50px;">
+                        <span class="tag fade-in">Блок 6 / Для кого</span>
+                        <h2 class="fade-in delay-1">Кому подходит эта модель?</h2>
+                    </div>
+                    <div class="grid-cards fade-in delay-2">
+                        <div class="card">
+                            <div class="card-num">01</div>
+                            <h3>Путешественникам</h3>
+                            <p>Тем, кто ценит эстетику морских путешествий и хочет получить лучший уровень сервиса на эксклюзивных клубных условиях.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-num">02</div>
+                            <h3>Инфлюенсерам</h3>
+                            <p>Блогерам и создателям контента, которые органично транслируют свой яркий образ жизни в социальных сетях.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-num">03</div>
+                            <h3>Предпринимателям</h3>
+                            <p>Профессионалам, которые ищут дополнительный легальный доход с возможностью удаленной работы из любой точки Европы.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: What you get & Contact Form -->
+            <div class="slide">
+                <div class="grid-2">
+                    <div>
+                        <span class="tag fade-in">Блок 7 / Ценность</span>
+                        <h2 class="fade-in delay-1">Что вы получаете?</h2>
+                        <ul style="list-style: none;" class="fade-in delay-2">
+                            <li style="margin-bottom: 15px; border-bottom: 1px solid var(--milk); padding-bottom: 10px;">
+                                <strong style="color: var(--primary);">✓</strong> Международное сообщество единомышленников в Европе.
+                            </li>
+                            <li style="margin-bottom: 15px; border-bottom: 1px solid var(--milk); padding-bottom: 10px;">
+                                <strong style="color: var(--primary);">✓</strong> Полноценную систему обучения ведению онлайн-бизнеса.
+                            </li>
+                            <li style="margin-bottom: 15px; border-bottom: 1px solid var(--milk); padding-bottom: 10px;">
+                                <strong style="color: var(--primary);">✓</strong> Прозрачные выплаты по лицензионной реферальной программе.
+                            </li>
+                            <li style="margin-bottom: 15px; padding-bottom: 10px;">
+                                <strong style="color: var(--primary);">✓</strong> Свободу перемещения и планирования своего рабочего дня.
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Integrated Telegram Feedback Form -->
+                    <div class="feedback-form fade-in delay-3">
+                        <h3 style="font-size: 1.4rem; margin-bottom: 10px; font-weight: 700;">Связаться со мной</h3>
+                        <p style="font-size: 0.9rem; color: var(--gray); margin-bottom: 20px;">Заполните форму, и бот мгновенно передаст вашу заявку.</p>
+                        
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Ваше имя</label>
+                                <input type="text" id="name" class="form-control" placeholder="Иван Иванов" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact">Ваш Telegram / Телефон</label>
+                                <input type="text" id="contact" class="form-control" placeholder="@username или +7..." required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Ваш вопрос / комментарий</label>
+                                <textarea id="message" rows="3" class="form-control" placeholder="Хочу узнать подробнее об EasyLife..."></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn" id="submitBtn">Оставить заявку</button>
+                            <div class="form-status" id="formStatus"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button class="btn btn-prev" id="prevBtn">←</button>
+            <button class="btn" id="nextBtn">→</button>
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressBar = document.getElementById('progressBar');
+        const slideCounter = document.getElementById('slideCounter');
+        
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                if(index === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            // Update Progress Bar
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            progressBar.style.width = `${progress}%`;
+
+            // Update Slide Counter
+            slideCounter.textContent = `${currentSlide + 1} / ${totalSlides}`;
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+            } else {
+                currentSlide = 0; // Loop back
+            }
+            updateSlide();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+            } else {
+                currentSlide = totalSlides - 1; // Loop back
+            }
+            updateSlide();
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextBtn.click();
+            } else if (e.key === 'ArrowLeft') {
+                prevBtn.click();
+            }
+        });
+        
+        // Telegram Form Integration
+        const contactForm = document.getElementById('contactForm');
+        const formStatus = document.getElementById('formStatus');
+        const submitBtn = document.getElementById('submitBtn');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const contact = document.getElementById('contact').value;
+            const message = document.getElementById('message').value;
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Отправка...';
+            
+            // Telegram Credentials from your input
+            const botToken = "8483273720:AAEj2NvFYXuXInFNg3UGL_35sTEjvgBgOrQ";
+            const chatId = "6440427082";
+            
+            const text = `📬 *Новая заявка с презентации EasyLife Opportunities!*\n\n*Имя:* ${name}\n*Контакты:* ${contact}\n*Сообщение:* ${message || 'Без сообщения'}`;
+
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}&parse_mode=Markdown`;
+
+            fetch(url)
+                .then(response => {
+                    if (response.ok) {
+                        formStatus.style.display = 'block';
+                        formStatus.style.color = '#27AE60';
+                        formStatus.textContent = '✓ Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.';
+                        contactForm.reset();
+                    } else {
+                        throw new Error('Ошибка сети');
+                    }
+                })
+                .catch(error => {
+                    formStatus.style.display = 'block';
+                    formStatus.style.color = '#C0392B';
+                    formStatus.textContent = '❌ Не удалось отправить заявку. Пожалуйста, попробуйте позже.';
+                })
+                .finally(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Оставить заявку';
+                });
+        });
+
+        // Init
+        updateSlide();
+    </script>
+</body>
+</html>
