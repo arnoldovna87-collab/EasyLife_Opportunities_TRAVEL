@@ -4,18 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EasyLife Opportunities — Premium Presentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
-        
         :root {
             --primary: #E97A22;
+            --primary-hover: #d66815;
             --dark: #1E1E1E;
             --charcoal: #2C2C2C;
             --light-beige: #FAF9F6;
             --milk: #F4F1EA;
             --white: #FFFFFF;
             --gray: #7F8C8D;
-            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
 
         * {
@@ -32,12 +37,91 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* Top Header Bar */
+        .top-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: rgba(250, 249, 246, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .header-logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-logo span {
+            color: var(--primary);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-header-contact {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(233, 122, 34, 0.3);
+        }
+
+        .btn-header-contact:hover {
+            background-color: var(--dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-header-outline {
+            background: transparent;
+            color: var(--charcoal);
+            border: 1.5px solid var(--charcoal);
+            padding: 9px 18px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-header-outline:hover {
+            background-color: var(--charcoal);
+            color: var(--white);
+        }
+
         /* Presentation Wrapper */
         .presentation-container {
             width: 100vw;
             height: 100vh;
             position: relative;
             overflow: hidden;
+            padding-top: 70px;
         }
 
         /* Navigation controls */
@@ -63,7 +147,7 @@
             justify-content: center;
             font-size: 1.2rem;
             transition: var(--transition);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         .btn:hover {
@@ -85,11 +169,11 @@
         /* Progress indicator */
         .progress-bar {
             position: fixed;
-            top: 0;
+            top: 70px;
             left: 0;
             height: 4px;
             background-color: var(--primary);
-            z-index: 101;
+            z-index: 201;
             transition: width 0.3s ease;
         }
 
@@ -97,17 +181,21 @@
             position: fixed;
             bottom: 45px;
             left: 40px;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.95rem;
             color: var(--gray);
             z-index: 100;
             letter-spacing: 1px;
+            background: rgba(255,255,255,0.7);
+            padding: 6px 14px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
         }
 
         /* Slides container */
         .slides {
             width: 100%;
-            height: 100%;
+            height: calc(100vh - 70px);
             position: relative;
         }
 
@@ -124,11 +212,67 @@
             align-items: center;
             justify-content: center;
             padding: 40px 80px;
+            overflow-y: auto;
         }
 
         .slide.active {
             opacity: 1;
             visibility: visible;
+        }
+
+        /* Slide 1 Cover Layout */
+        .cover-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 50px;
+            width: 100%;
+            max-width: 1280px;
+            align-items: center;
+        }
+
+        .hero-cover-text {
+            text-align: left;
+        }
+
+        .hero-ship-visual {
+            position: relative;
+            height: 480px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            background-image: url('http://googleusercontent.com/image_collection/image_retrieval/16301064866313856486_0');
+            background-size: cover;
+            background-position: center;
+            border: 4px solid var(--white);
+        }
+
+        .hero-ship-badge {
+            position: absolute;
+            bottom: 25px;
+            left: 25px;
+            right: 25px;
+            background: rgba(30, 30, 30, 0.75);
+            backdrop-filter: blur(10px);
+            padding: 20px 25px;
+            border-radius: 16px;
+            color: var(--white);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .hero-ship-badge h4 {
+            font-size: 1.1rem;
+            color: #FFB366;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-ship-badge p {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.9);
+            margin: 0;
+            line-height: 1.4;
         }
 
         /* Layout Types */
@@ -162,9 +306,9 @@
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             line-height: 1.15;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--dark);
             margin-bottom: 25px;
         }
@@ -176,7 +320,7 @@
         h2 {
             font-size: 2.2rem;
             line-height: 1.25;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 20px;
             color: var(--dark);
         }
@@ -189,7 +333,7 @@
         }
 
         .lead-p {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             line-height: 1.6;
             color: var(--charcoal);
             font-weight: 400;
@@ -199,7 +343,7 @@
         .card {
             background-color: var(--white);
             padding: 35px;
-            border-radius: 12px;
+            border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.03);
             transition: var(--transition);
             border-top: 4px solid transparent;
@@ -208,12 +352,12 @@
         .card:hover {
             transform: translateY(-5px);
             border-top-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(233, 122, 34, 0.08);
+            box-shadow: 0 20px 40px rgba(233, 122, 34, 0.12);
         }
 
         .card-num {
             font-size: 2.5rem;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--primary);
             margin-bottom: 15px;
         }
@@ -221,7 +365,7 @@
         .card h3 {
             font-size: 1.3rem;
             margin-bottom: 15px;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .card p {
@@ -231,7 +375,7 @@
             line-height: 1.5;
         }
 
-        /* Big Accent Layout */
+        /* Hero Slide (Centered) */
         .hero-slide {
             text-align: center;
             max-width: 900px;
@@ -239,9 +383,9 @@
 
         .logo-mark {
             font-size: 1.5rem;
-            font-weight: 700;
+            font-weight: 800;
             letter-spacing: 2px;
-            margin-bottom: 40px;
+            margin-bottom: 25px;
         }
 
         .logo-mark span {
@@ -252,7 +396,7 @@
         .visual-box {
             width: 100%;
             height: 480px;
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 20px 50px rgba(0,0,0,0.08);
             position: relative;
@@ -265,8 +409,8 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-            padding: 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 35px;
             color: var(--white);
         }
 
@@ -282,30 +426,30 @@
             transform: translateY(0);
         }
 
-        .delay-1 { transition-delay: 0.2s !important; }
-        .delay-2 { transition-delay: 0.4s !important; }
-        .delay-3 { transition-delay: 0.6s !important; }
+        .delay-1 { transition-delay: 0.15s !important; }
+        .delay-2 { transition-delay: 0.3s !important; }
+        .delay-3 { transition-delay: 0.45s !important; }
 
         /* Modern Feedback Form */
         .feedback-form {
             background-color: var(--white);
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.06);
             width: 100%;
             max-width: 500px;
             border: 2px solid var(--milk);
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             text-align: left;
         }
 
         .form-group label {
             display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
+            font-size: 0.8rem;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 8px;
@@ -314,12 +458,12 @@
 
         .form-control {
             width: 100%;
-            padding: 14px 18px;
+            padding: 13px 16px;
             border: 1.5px solid var(--milk);
             background-color: var(--light-beige);
-            border-radius: 8px;
+            border-radius: 10px;
             font-family: inherit;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--dark);
             transition: var(--transition);
         }
@@ -328,7 +472,7 @@
             outline: none;
             border-color: var(--primary);
             background-color: var(--white);
-            box-shadow: 0 0 10px rgba(233, 122, 34, 0.1);
+            box-shadow: 0 0 10px rgba(233, 122, 34, 0.15);
         }
 
         .submit-btn {
@@ -336,29 +480,277 @@
             background-color: var(--primary);
             color: var(--white);
             border: none;
-            padding: 16px;
+            padding: 15px;
             border-radius: 30px;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: var(--transition);
             letter-spacing: 1px;
             margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(233, 122, 34, 0.3);
         }
 
         .submit-btn:hover {
             background-color: var(--dark);
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
 
         .form-status {
             margin-top: 15px;
-            font-size: 0.95rem;
-            font-weight: 500;
+            font-size: 0.9rem;
+            font-weight: 600;
             display: none;
+            border-radius: 8px;
+            padding: 10px;
         }
 
-        @media (max-width: 768px) {
+        /* CHAT BOT WIDGET STYLES */
+        .chat-widget-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 40px;
+            z-index: 300;
+            background: linear-gradient(135deg, var(--primary), #FF9443);
+            color: var(--white);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(233, 122, 34, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .chat-widget-btn:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 12px 30px rgba(233, 122, 34, 0.5);
+        }
+
+        .chat-pulse {
+            width: 10px;
+            height: 10px;
+            background-color: #2ECC71;
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7);
+            animation: pulse-green 1.8s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+        }
+
+        /* Bot Popup Modal */
+        .bot-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
+            z-index: 400;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .bot-modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .bot-container {
+            width: 90%;
+            max-width: 460px;
+            height: 600px;
+            background: var(--white);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(40px) scale(0.95); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        .bot-header {
+            background: var(--dark);
+            color: var(--white);
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .bot-avatar-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .bot-avatar {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--primary), #FF9443);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--white);
+        }
+
+        .bot-title-text h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .bot-title-text p {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.7);
+            margin: 0;
+        }
+
+        .bot-close-btn {
+            background: transparent;
+            border: none;
+            color: rgba(255,255,255,0.7);
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .bot-close-btn:hover {
+            color: var(--white);
+        }
+
+        .bot-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background-color: #F8F9FA;
+        }
+
+        .msg-bubble {
+            max-width: 85%;
+            padding: 14px 18px;
+            border-radius: 18px;
+            font-size: 0.92rem;
+            line-height: 1.5;
+            animation: fadeInMsg 0.3s ease;
+        }
+
+        @keyframes fadeInMsg {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .msg-bot {
+            background-color: var(--white);
+            color: var(--dark);
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            align-self: flex-start;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .msg-user {
+            background-color: var(--primary);
+            color: var(--white);
+            border-bottom-right-radius: 4px;
+            align-self: flex-end;
+        }
+
+        .bot-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .bot-opt-btn {
+            background: var(--milk);
+            border: 1px solid rgba(0,0,0,0.08);
+            color: var(--dark);
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: left;
+            transition: var(--transition);
+        }
+
+        .bot-opt-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .bot-lead-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+            background: var(--white);
+            padding: 15px;
+            border-radius: 14px;
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .bot-lead-form input {
+            padding: 10px 12px;
+            border: 1px solid #DDD;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-family: inherit;
+        }
+
+        .bot-lead-form button {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .bot-lead-form button:hover {
+            background: var(--dark);
+        }
+
+        @media (max-width: 900px) {
+            .cover-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .hero-ship-visual {
+                height: 320px;
+            }
+            .top-header {
+                padding: 0 20px;
+            }
             .grid-2 {
                 grid-template-columns: 1fr;
                 gap: 30px;
@@ -368,8 +760,7 @@
                 gap: 20px;
             }
             .slide {
-                padding: 40px 20px;
-                overflow-y: auto;
+                padding: 30px 20px;
             }
             h1 { font-size: 2.2rem; }
             h2 { font-size: 1.6rem; }
@@ -378,32 +769,70 @@
                 right: 20px;
             }
             .slide-counter {
-                bottom: 25px;
+                bottom: 20px;
                 left: 20px;
             }
+            .chat-widget-btn {
+                bottom: 80px;
+                left: 20px;
+                padding: 10px 18px;
+                font-size: 0.85rem;
+            }
             .visual-box {
-                height: 250px;
+                height: 260px;
             }
         }
     </style>
 </head>
 <body>
 
+    <!-- Top Fixed Header -->
+    <header class="top-header">
+        <a href="#" class="header-logo" onclick="goToSlide(0)">
+            <i class="fa-solid fa-ship" style="color: var(--primary);"></i>
+            EASYLIFE<span>.</span>OPPORTUNITIES
+        </a>
+        <div class="header-actions">
+            <button class="btn-header-outline" onclick="goToSlide(7)">
+                <i class="fa-regular fa-envelope"></i> Форма
+            </button>
+            <button class="btn-header-contact" onclick="openBotModal()">
+                <i class="fa-solid fa-comments"></i> Связаться
+            </button>
+        </div>
+    </header>
+
+    <!-- Progress Indicator -->
     <div class="progress-bar" id="progressBar"></div>
     <div class="slide-counter" id="slideCounter">1 / 8</div>
 
     <div class="presentation-container">
         <div class="slides" id="slidesContainer">
 
-            <!-- Slide 1: Cover -->
+            <!-- Slide 1: Cover with Luxury Cruise Ship Visual -->
             <div class="slide active" style="background-color: var(--light-beige);">
-                <div class="hero-slide">
-                    <div class="logo-mark fade-in">EASYLIFE<span>.</span>OPPORTUNITIES</div>
-                    <h1 class="fade-in delay-1">Эволюция дохода:<br>новые правила игры в <span>Европе</span></h1>
-                    <p class="lead-p fade-in delay-2" style="max-width: 650px; margin: 0 auto 40px auto; color: var(--gray);">
-                        Честный разговор о свободе, современных партнерских моделях и том, как гармонично вписать новые возможности в привычный ритм жизни.
-                    </p>
-                    <div class="tag fade-in delay-3">Листайте вперед →</div>
+                <div class="cover-grid">
+                    <div class="hero-cover-text">
+                        <div class="logo-mark fade-in">EASYLIFE<span>.</span>OPPORTUNITIES</div>
+                        <h1 class="fade-in delay-1">Эволюция дохода:<br>новые правила игры в <span>Европе</span></h1>
+                        <p class="lead-p fade-in delay-2" style="margin-bottom: 30px; color: var(--gray);">
+                            Честный разговор о свободе, современных партнерских моделях и том, как гармонично вписать новые возможности в привычный ритм жизни.
+                        </p>
+                        <div style="display: flex; gap: 15px; align-items: center;" class="fade-in delay-3">
+                            <button class="btn-header-contact" onclick="openBotModal()" style="padding: 14px 28px; font-size: 1rem;">
+                                <i class="fa-solid fa-paper-plane"></i> Консультация с ботом
+                            </button>
+                            <span class="tag" style="margin: 0; cursor: pointer;" onclick="nextSlide()">Листайте вперед →</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Added Premium Cruise Ship Visual Card -->
+                    <div class="hero-ship-visual fade-in delay-2">
+                        <div class="hero-ship-badge">
+                            <h4><i class="fa-solid fa-anchor"></i> Travel Tech & Cruise Industry</h4>
+                            <p>Инновационный подход к премиальному отдыху и созданию дохода в самой вдохновляющей индустрии мира.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -596,14 +1025,43 @@
 
         </div>
 
-        <!-- Controls -->
+        <!-- Slide Navigation Controls -->
         <div class="controls">
             <button class="btn btn-prev" id="prevBtn">←</button>
             <button class="btn" id="nextBtn">→</button>
         </div>
     </div>
 
+    <!-- Floating Chat Widget Trigger -->
+    <button class="chat-widget-btn" onclick="openBotModal()">
+        <span class="chat-pulse"></span>
+        <i class="fa-solid fa-robot"></i> Помощник EasyLife
+    </button>
+
+    <!-- Interactive Chat Bot Modal -->
+    <div class="bot-modal-overlay" id="botModal">
+        <div class="bot-container">
+            <div class="bot-header">
+                <div class="bot-avatar-info">
+                    <div class="bot-avatar">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="bot-title-text">
+                        <h4>EasyLife Assistant</h4>
+                        <p>Онлайн • Отвечает мгновенно</p>
+                    </div>
+                </div>
+                <button class="bot-close-btn" onclick="closeBotModal()">&times;</button>
+            </div>
+
+            <div class="bot-messages" id="botMessages">
+                <!-- Messages dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
     <script>
+        // SLIDE NAVIGATION LOGIC
         const slides = document.querySelectorAll('.slide');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
@@ -630,34 +1088,56 @@
             slideCounter.textContent = `${currentSlide + 1} / ${totalSlides}`;
         }
 
-        nextBtn.addEventListener('click', () => {
+        function nextSlide() {
             if (currentSlide < totalSlides - 1) {
                 currentSlide++;
             } else {
-                currentSlide = 0; // Loop back
+                currentSlide = 0;
             }
             updateSlide();
-        });
+        }
 
-        prevBtn.addEventListener('click', () => {
+        function prevSlide() {
             if (currentSlide > 0) {
                 currentSlide--;
             } else {
-                currentSlide = totalSlides - 1; // Loop back
+                currentSlide = totalSlides - 1;
             }
             updateSlide();
-        });
+        }
+
+        function goToSlide(index) {
+            if (index >= 0 && index < totalSlides) {
+                currentSlide = index;
+                updateSlide();
+            }
+        }
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
 
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
+            // Ignore arrow keys if user is typing in forms
+            if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') return;
+
             if (e.key === 'ArrowRight' || e.key === ' ') {
-                nextBtn.click();
+                nextSlide();
             } else if (e.key === 'ArrowLeft') {
-                prevBtn.click();
+                prevSlide();
             }
         });
         
-        // Telegram Form Integration
+        // TELEGRAM INTEGRATION
+        const botToken = "8483273720:AAGSfe3id_tGWz_d2aPfntWTMYteQuTgf5c";
+        const chatId = "6440427082";
+
+        function sendTelegramMessage(text) {
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}&parse_mode=Markdown`;
+            return fetch(url);
+        }
+
+        // Contact Form Submission
         const contactForm = document.getElementById('contactForm');
         const formStatus = document.getElementById('formStatus');
         const submitBtn = document.getElementById('submitBtn');
@@ -672,18 +1152,13 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'Отправка...';
             
-            // Telegram Credentials from your input
-            const botToken = "8483273720:AAGSfe3id_tGWz_d2aPfntWTMYteQuTgf5c";
-            const chatId = "6440427082";
-            
             const text = `📬 *Новая заявка с презентации EasyLife TRAVEL Opportunities!*\n\n*Имя:* ${name}\n*Контакты:* ${contact}\n*Сообщение:* ${message || 'Без сообщения'}`;
 
-            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}&parse_mode=Markdown`;
-
-            fetch(url)
+            sendTelegramMessage(text)
                 .then(response => {
                     if (response.ok) {
                         formStatus.style.display = 'block';
+                        formStatus.style.backgroundColor = '#E8F8F5';
                         formStatus.style.color = '#27AE60';
                         formStatus.textContent = '✓ Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.';
                         contactForm.reset();
@@ -693,6 +1168,7 @@
                 })
                 .catch(error => {
                     formStatus.style.display = 'block';
+                    formStatus.style.backgroundColor = '#FDEDEC';
                     formStatus.style.color = '#C0392B';
                     formStatus.textContent = '❌ Не удалось отправить заявку. Пожалуйста, попробуйте позже.';
                 })
@@ -701,6 +1177,125 @@
                     submitBtn.textContent = 'Оставить заявку';
                 });
         });
+
+        // INTERACTIVE CHAT BOT LOGIC
+        const botModal = document.getElementById('botModal');
+        const botMessages = document.getElementById('botMessages');
+        let botState = {
+            interest: '',
+            format: '',
+            name: '',
+            contact: ''
+        };
+
+        function openBotModal() {
+            botModal.classList.add('active');
+            if (botMessages.children.length === 0) {
+                initBotChat();
+            }
+        }
+
+        function closeBotModal() {
+            botModal.classList.remove('active');
+        }
+
+        // Close modal when clicking outside box
+        botModal.addEventListener('click', (e) => {
+            if (e.target === botModal) closeBotModal();
+        });
+
+        function addBotMsg(htmlContent) {
+            const msg = document.createElement('div');
+            msg.className = 'msg-bubble msg-bot';
+            msg.innerHTML = htmlContent;
+            botMessages.appendChild(msg);
+            botMessages.scrollTop = botMessages.scrollHeight;
+        }
+
+        function addUserMsg(text) {
+            const msg = document.createElement('div');
+            msg.className = 'msg-bubble msg-user';
+            msg.textContent = text;
+            botMessages.appendChild(msg);
+            botMessages.scrollTop = botMessages.scrollHeight;
+        }
+
+        function initBotChat() {
+            addBotMsg(`
+                Здравствуйте! 👋 Рад приветствовать вас в <strong>EasyLife Opportunities</strong>.<br><br>
+                Я ваш интерактивный помощник. Что вас больше всего интересует?
+                <div class="bot-options">
+                    <button class="bot-opt-btn" onclick="handleBotStep1('Путешествия и круизы 🚢')">🚢 Доступ к круизам и отелям со скидкой</button>
+                    <button class="bot-opt-btn" onclick="handleBotStep1('Дополнительный/Основной доход 💼')">💼 Дополнительный или основной доход в Европе</button>
+                    <button class="bot-opt-btn" onclick="handleBotStep1('Инфлюенсинг и блог 📸')">📸 Партнерство для блогеров и инфлюенсеров</button>
+                    <button class="bot-opt-btn" onclick="handleBotStep1('Хочу узнать всё подробно ✨')">✨ Хочу узнать все возможности сразу</button>
+                </div>
+            `);
+        }
+
+        function handleBotStep1(choice) {
+            botState.interest = choice;
+            addUserMsg(choice);
+
+            setTimeout(() => {
+                addBotMsg(`
+                    Отличный выбор! 🌟 Скажите, какой формат взаимодействия вам ближе всего?
+                    <div class="bot-options">
+                        <button class="bot-opt-btn" onclick="handleBotStep2('Просто бронировать со скидкой')">🏖 Хочу быть клиентом и выгодно путешествовать</button>
+                        <button class="bot-opt-btn" onclick="handleBotStep2('Интересует готовый онлайн-бизнес')">🚀 Интересует построение онлайн-бизнеса без рисков</button>
+                        <button class="bot-opt-btn" onclick="handleBotStep2('Нужна личная консультация')">💬 Хочу задать вопросы эксперту лично</button>
+                    </div>
+                `);
+            }, 400);
+        }
+
+        function handleBotStep2(choice) {
+            botState.format = choice;
+            addUserMsg(choice);
+
+            setTimeout(() => {
+                addBotMsg(`
+                    Замечательно! 🚀 Чтобы мы могли прислать вам персональную подборку материалов и ответили на все вопросы, оставьте свои контакты:
+                    <div class="bot-lead-form">
+                        <input type="text" id="botName" placeholder="Ваше имя" required>
+                        <input type="text" id="botContact" placeholder="Telegram @username или телефон" required>
+                        <button onclick="submitBotLead()">Оставить заявку ✨</button>
+                    </div>
+                `);
+            }, 400);
+        }
+
+        function submitBotLead() {
+            const nameInput = document.getElementById('botName');
+            const contactInput = document.getElementById('botContact');
+
+            if (!nameInput.value.trim() || !contactInput.value.trim()) {
+                alert('Пожалуйста, заполните имя и контактные данные.');
+                return;
+            }
+
+            botState.name = nameInput.value.trim();
+            botState.contact = contactInput.value.trim();
+
+            addUserMsg(`Имя: ${botState.name}, Контакт: ${botState.contact}`);
+
+            const text = `🤖 *Новый лид из интерактивного БОТА EasyLife!*\n\n*Имя:* ${botState.name}\n*Контакт:* ${botState.contact}\n*Интерес:* ${botState.interest}\n*Формат:* ${botState.format}`;
+
+            sendTelegramMessage(text)
+                .then(res => {
+                    if (res.ok) {
+                        addBotMsg(`
+                            ✅ <strong>Спасибо, ${botState.name}!</strong><br>
+                            Ваша заявка успешно принята. Мы напишем вам в ближайшее время и отправим все подробности!
+                        `);
+                    } else {
+                        addBotMsg(`⚠️ Произошла ошибка при отправке. Вы можете воспользоваться формой на 8 слайде.`);
+                    }
+                })
+                .catch(() => {
+                    addBotMsg(`⚠️ Не удалось отправить данные. Попробуйте еще раз.`);
+                });
+        }
 
         // Init
         updateSlide();
